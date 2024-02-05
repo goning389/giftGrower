@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.17'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '1.8'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //Google Login Api 연동
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web' //웹 서비스 구동을 위한 dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.session:spring-session-core'
+    implementation 'com.github.jonasrutishauser:transactional-event:2.0.1'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'javax.servlet:jstl'
+    //implementation 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.json:json:20190722'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //DB : mysql
+    //JPA 연동
+    //젠장....개헤맴. mysql:mysql-connector-java으로만 가이드된 구글링이 겁나 많은데 그렇게만 했을 땐 버전이 안 맞아서
+    //계속 에러가 발생함(Cannot load driver class: com.mysql.jdbc.Driver).
+    //이럴 경우 반드시 뒤에 사용 중인 mysql의 버전을 써줘야됨. mysql의 버전!!!!
+    implementation 'mysql:mysql-connector-java:8.0.31'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //transactional annotation
+    //implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    //runtimeOnly 'com.h2database:h2'
+
+    // MyBatis Mapper
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
